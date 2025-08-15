@@ -1,6 +1,5 @@
 // app/admin/layout.tsx
 import Link from "next/link";
-import "./admin.css"; // optional custom styles
 
 export default function AdminLayout({
   children,
