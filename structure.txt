@@ -1,0 +1,70 @@
+ecommerce-app/
+├── public/                     # Static files (images, fonts, etc.)
+│   ├── logo.png
+│   ├── banners/
+│   ├── products/
+│   └── favicon.ico
+│
+├── src/
+│   ├── app/                    # App Router pages & layouts
+│   │   ├── layout.tsx          # Root layout
+│   │   ├── page.tsx            # Homepage
+│   │   ├── product/
+│   │   │   └── [id]/page.tsx   # Product details page
+│   │   ├── cart/page.tsx       # User's cart
+│   │   ├── favourites/page.tsx # User's favourites
+│   │   ├── checkout/page.tsx   # Checkout page
+│   │   ├── admin/              # Admin dashboard
+│   │   │   ├── layout.tsx      # Admin layout with sidebar
+│   │   │   ├── page.tsx        # Admin home/dashboard
+│   │   │   ├── products/       # CRUD for products
+│   │   │   │   ├── page.tsx    # List products
+│   │   │   │   ├── new/page.tsx# Add new product
+│   │   │   │   └── [id]/page.tsx # Edit specific product
+│   │   └── api/                # API routes
+│   │       ├── products/
+│   │       │   ├── route.ts    # GET all, POST new product
+│   │       │   └── [id]/route.ts # GET, PUT, DELETE product
+│   │       ├── auth/           # Auth API
+│   │       └── orders/         # Orders API
+│   │
+│   ├── components/             # Reusable UI components
+│   │   ├── navbar/
+│   │   │   ├── Navbar.tsx
+│   │   │   └── CartIcon.tsx
+│   │   ├── footer/Footer.tsx
+│   │   ├── product/
+│   │   │   ├── ProductCard.tsx
+│   │   │   ├── ProductSlider.tsx
+│   │   │   └── ProductGrid.tsx
+│   │   ├── ui/                 # Buttons, modals, etc.
+│   │   └── forms/              # Form components
+│   │
+│   ├── lib/                     # Utilities & helpers
+│   │   ├── db.ts                # Database connection
+│   │   ├── validators.ts        # Zod schemas for validation
+│   │   ├── auth.ts              # Auth helpers
+│   │   └── cloudinary.ts        # Image upload config
+│   │
+│   ├── hooks/                   # Custom hooks
+│   │   ├── useCart.ts
+│   │   └── useFavourites.ts
+│   │
+│   ├── store/                   # State management (Zustand/Redux)
+│   │   ├── cartStore.ts
+│   │   └── favouritesStore.ts
+│   │
+│   ├── styles/                  # Global & module CSS
+│   │   ├── globals.css
+│   │   └── variables.css
+│   │
+│   └── types/                   # TypeScript types
+│       ├── product.d.ts
+│       ├── user.d.ts
+│       └── order.d.ts
+│
+├── .env                         # Environment variables
+├── next.config.js
+├── tailwind.config.js
+├── tsconfig.json
+└── package.json
