@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { ShoppingCart, Heart, Star, ArrowRight, Sparkles } from "lucide-react";
+import { ShoppingCart, Heart, ArrowRight, Sparkles } from "lucide-react";
 
 const products = [
   {
