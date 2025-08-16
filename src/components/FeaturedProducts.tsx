@@ -171,7 +171,7 @@ export default function FeaturedProducts() {
                     <motion.button
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
-                      className="p-3 absolute bottom-[65%] md:bottom-[70%] right-2 bg-white/90 dark:bg-dark-surface/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl border border-white/20 dark:border-gray-700/20 group/btn"
+                      className="p-3 absolute bottom-[65.1%] md:bottom-[70%] right-2 bg-white/90 dark:bg-dark-surface/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl border border-white/20 dark:border-gray-700/20 group/btn"
                     >
                       <Heart className="w-5 h-5 text-gray-700 dark:text-gray-200 group-hover/btn:text-red-500 transition-colors duration-300" />
                     </motion.button>
