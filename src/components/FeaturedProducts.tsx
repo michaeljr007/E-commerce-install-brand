@@ -102,7 +102,7 @@ export default function FeaturedProducts() {
             </span>
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-semibold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-white dark:via-gray-200 dark:to-white bg-clip-text text-transparent mb-5">
+          <h2 className="text-3xl md:text-5xl font-semibold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-white dark:via-gray-200 dark:to-white bg-clip-text text-transparent mb-5">
             Featured Products
           </h2>
 
@@ -134,7 +134,7 @@ export default function FeaturedProducts() {
             >
               <Link href={product.href} className="block">
                 {/* Product Badge */}
-                <div className="absolute top-4 left-4 z-10">
+                <div className="absolute top-1 md:top-2 left-1 md:left-2 z-10">
                   <motion.span
                     initial={{ scale: 0, rotate: -180 }}
                     animate={{ scale: 1, rotate: 0 }}
@@ -164,7 +164,7 @@ export default function FeaturedProducts() {
                   {/* Floating action buttons */}
                   <motion.div
                     initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                    whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
                     className="flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 z-20"
                   >
@@ -174,13 +174,6 @@ export default function FeaturedProducts() {
                       className="p-3 absolute bottom-[65.1%] md:bottom-[70%] right-2 bg-white/90 dark:bg-dark-surface/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl border border-white/20 dark:border-gray-700/20 group/btn"
                     >
                       <Heart className="w-5 h-5 text-gray-700 dark:text-gray-200 group-hover/btn:text-red-500 transition-colors duration-300" />
-                    </motion.button>
-                    <motion.button
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="p-3 absolute bottom-4 right-2 bg-white/90 dark:bg-dark-surface/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl border border-white/20 dark:border-gray-700/20 group/btn"
-                    >
-                      <ShoppingCart className="w-5 h-5 text-gray-700 dark:text-gray-200 group-hover/btn:text-blue-500 transition-colors duration-300" />
                     </motion.button>
                   </motion.div>
                 </div>
@@ -195,12 +188,13 @@ export default function FeaturedProducts() {
                       <p className="text-xl md:text-2xl font-bold bg-gradient-to-r from-yellow-500 to-amber-600 dark:from-yellow-400 dark:to-amber-500 bg-clip-text text-transparent">
                         {product.price}
                       </p>
-                      <motion.div
-                        className="w-8 h-8 rounded-full bg-gradient-to-r from-yellow-500 to-amber-600 dark:from-yellow-400 dark:to-amber-500 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
-                        whileHover={{ rotate: 90 }}
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="p-3 absolute bottom-2 md:bottom-3 right-2 bg-amber-100 dark:bg-dark-surface/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl border border-white/20 dark:border-gray-700/20 group/btn"
                       >
-                        <ArrowRight className="w-4 h-4 text-white" />
-                      </motion.div>
+                        <ShoppingCart className="w-5 h-5 text-gray-700 dark:text-gray-200 group-hover/btn:text-blue-500 transition-colors duration-300" />
+                      </motion.button>
                     </div>
                   </div>
                 </div>
@@ -226,7 +220,7 @@ export default function FeaturedProducts() {
             href="/contact"
             className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium transition-colors duration-300"
           >
-            Get in touch with our style experts
+            Get in touch with us
             <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>

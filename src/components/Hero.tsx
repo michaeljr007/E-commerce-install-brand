@@ -53,7 +53,7 @@ export default function Hero() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.1 }}
-      className="relative w-full h-[92vh] max-h-[1000px] dark:bg-dark-surface"
+      className="relative w-full h-[83vh] md:h-[92vh] dark:bg-dark-surface"
     >
       <Swiper
         modules={[Navigation, Autoplay]}

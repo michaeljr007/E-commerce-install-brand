@@ -13,9 +13,9 @@ export default function Navbar() {
   const { darkMode, toggleTheme } = useThemeStore();
 
   const navLinks = [
-    { name: "Men", href: "/men" },
-    { name: "Women", href: "/women" },
-    { name: "Kids", href: "/kids" },
+    { name: "Men", href: "/products?category=men" },
+    { name: "Women", href: "/products?category=women" },
+    { name: "Kids", href: "/products?category=kids" },
     { name: "Sale", href: "/sale", special: true },
   ];
 
@@ -91,7 +91,7 @@ export default function Navbar() {
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Link
               href="/"
-              className="text-3xl italic font-bold tracking-tight bg-gradient-to-r from-yellow-500 to-amber-600 dark:from-yellow-400 dark:to-amber-500 bg-clip-text text-transparent hover:from-amber-600 hover:to-black dark:hover:from-amber-500 dark:hover:to-black transition-all duration-300"
+              className="text-2xl md:text-3xl italic font-bold tracking-tight bg-gradient-to-r from-yellow-500 to-amber-600 dark:from-yellow-400 dark:to-amber-500 bg-clip-text text-transparent hover:from-amber-600 hover:to-black dark:hover:from-amber-500 dark:hover:to-black transition-all duration-300"
             >
               InstallBrand
             </Link>

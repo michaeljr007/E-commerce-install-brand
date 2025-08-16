@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -200,14 +200,13 @@ export default function Categories() {
           animate={isInView ? "visible" : "hidden"}
         >
           <Swiper
-            modules={[Navigation, Pagination, Autoplay]}
+            modules={[Pagination, Autoplay]}
             spaceBetween={24}
             slidesPerView={1}
             breakpoints={{
               320: { slidesPerView: 2 },
               1024: { slidesPerView: 4 },
             }}
-            navigation
             autoplay={{ delay: 5000, disableOnInteraction: false }}
             className="mySwiper"
           >
@@ -244,18 +243,18 @@ export default function Categories() {
                         )}
 
                         {/* Image Container */}
-                        <div className="relative h-40 sm:h-56 overflow-hidden">
+                        <div className="relative h-52 sm:h-56 overflow-hidden">
                           <motion.div
                             className="absolute inset-0"
                             whileHover={{ scale: 1.1 }}
                             transition={{ duration: 0.6, ease: "easeOut" }}
                           >
                             <Image
-                              width={400}
-                              height={320}
                               src={cat.image}
                               alt={cat.name}
-                              className="w-full h-full object-cover"
+                              width={400}
+                              height={320}
+                              className="w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover"
                               priority={index < 2}
                             />
                           </motion.div>
