@@ -12,13 +12,17 @@ import {
   ShoppingBag,
 } from "lucide-react";
 import { useRef } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const categories = [
   {
     id: 1,
     name: "Men",
-    image: "/images/categories/men.jpg",
-    href: "/men",
+    image: "/images/slide1.jpeg",
     description: "Contemporary styles for the modern man",
     items: "2,500+ items",
     trend: "+15%",
@@ -28,9 +32,8 @@ const categories = [
   },
   {
     id: 2,
-    name: "Women",
-    image: "/images/categories/women.jpg",
-    href: "/women",
+    name: "Two Piece",
+    image: "/images/slide4.png",
     description: "Elegant fashion for every occasion",
     items: "3,200+ items",
     trend: "+23%",
@@ -40,9 +43,8 @@ const categories = [
   },
   {
     id: 3,
-    name: "Kids",
-    image: "/images/categories/kids.jpg",
-    href: "/kids",
+    name: "Traditional",
+    image: "/images/slide6.png",
     description: "Fun and comfortable clothing for children",
     items: "1,800+ items",
     trend: "+18%",
@@ -52,9 +54,8 @@ const categories = [
   },
   {
     id: 4,
-    name: "Sale",
-    image: "/images/categories/sale.jpg",
-    href: "/sale",
+    name: "Other",
+    image: "/images/slide3.png",
     description: "Amazing deals up to 70% off",
     items: "500+ items",
     trend: "70% OFF",
@@ -192,126 +193,143 @@ export default function Categories() {
           </p>
         </motion.div>
 
-        {/* Categories Grid */}
+        {/* Categories Slider */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
         >
-          {categories.map((cat, index) => {
-            const IconComponent = cat.icon;
-            return (
-              <motion.div key={cat.id} variants={itemVariants} custom={index}>
-                <motion.div
-                  variants={cardHoverVariants}
-                  initial="rest"
-                  whileHover="hover"
-                  whileTap={{ scale: 0.98 }}
-                  className="relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-500 cursor-pointer group bg-white dark:bg-dark-elevated"
-                >
-                  <Link href={cat.href} className="block">
-                    {/* Popular Badge */}
-                    {cat.popular && (
-                      <motion.div
-                        initial={{ scale: 0, rotate: -10 }}
-                        animate={{ scale: 1, rotate: 0 }}
-                        transition={{
-                          delay: 0.5 + index * 0.1,
-                          type: "spring",
-                          stiffness: 500,
-                        }}
-                        className="absolute top-4 right-4 z-20 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg"
-                      >
-                        Popular
-                      </motion.div>
-                    )}
-
-                    {/* Image Container */}
-                    <div className="relative h-80 sm:h-72 lg:h-80 overflow-hidden">
-                      <motion.div
-                        className="absolute inset-0"
-                        whileHover={{ scale: 1.1 }}
-                        transition={{ duration: 0.6, ease: "easeOut" }}
-                      >
-                        <Image
-                          width={400}
-                          height={320}
-                          src={cat.image}
-                          alt={cat.name}
-                          className="w-full h-full object-cover"
-                          priority={index < 2}
-                        />
-                      </motion.div>
-
-                      {/* Gradient Overlay */}
-                      <motion.div
-                        variants={overlayVariants}
-                        className={`absolute inset-0 bg-gradient-to-t ${cat.color} mix-blend-multiply`}
-                      />
-
-                      {/* Dark Overlay for Text Readability */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                    </div>
-
-                    {/* Content Overlay */}
+          <Swiper
+            modules={[Navigation, Pagination, Autoplay]}
+            spaceBetween={24}
+            slidesPerView={1}
+            breakpoints={{
+              320: { slidesPerView: 2 },
+              1024: { slidesPerView: 4 },
+            }}
+            navigation
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
+            className="mySwiper"
+          >
+            {categories.map((cat, index) => {
+              const IconComponent = cat.icon;
+              return (
+                <SwiperSlide key={cat.id}>
+                  <motion.div variants={itemVariants} custom={index}>
                     <motion.div
-                      variants={contentVariants}
-                      className="absolute inset-0 flex flex-col justify-end p-6 text-white"
+                      variants={cardHoverVariants}
+                      initial="rest"
+                      whileHover="hover"
+                      whileTap={{ scale: 0.98 }}
+                      className="relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-500 cursor-pointer group bg-white dark:bg-dark-elevated"
                     >
-                      {/* Icon */}
-                      <motion.div
-                        className="mb-4"
-                        whileHover={{ rotate: 360, scale: 1.2 }}
-                        transition={{ duration: 0.6 }}
+                      <Link
+                        href={`/products?category=${cat.name.toLowerCase()}`}
+                        className="block"
                       >
-                        <div
-                          className={`inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r ${cat.color} shadow-lg`}
-                        >
-                          <IconComponent className="w-6 h-6 text-white" />
-                        </div>
-                      </motion.div>
-
-                      {/* Category Name */}
-                      <h3 className="text-2xl sm:text-3xl font-bold mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-white group-hover:to-gray-200 transition-all duration-300">
-                        {cat.name}
-                      </h3>
-
-                      {/* Description */}
-                      <p className="text-white/90 text-sm mb-4 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                        {cat.description}
-                      </p>
-
-                      {/* Stats Row */}
-                      <div className="flex items-center justify-between text-sm">
-                        <div className="flex items-center space-x-3">
-                          <div className="flex items-center space-x-1">
-                            <ShoppingBag className="w-4 h-4" />
-                            <span className="font-medium">{cat.items}</span>
-                          </div>
-                          <div
-                            className={`flex items-center space-x-1 px-2 py-1 rounded-full bg-gradient-to-r ${cat.color} text-xs font-bold`}
+                        {/* Popular Badge */}
+                        {cat.popular && (
+                          <motion.div
+                            initial={{ scale: 0, rotate: -10 }}
+                            animate={{ scale: 1, rotate: 0 }}
+                            transition={{
+                              delay: 0.5 + index * 0.1,
+                              type: "spring",
+                              stiffness: 500,
+                            }}
+                            className="absolute top-4 right-4 z-20 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg"
                           >
-                            <TrendingUp className="w-3 h-3" />
-                            <span>{cat.trend}</span>
-                          </div>
+                            Popular
+                          </motion.div>
+                        )}
+
+                        {/* Image Container */}
+                        <div className="relative h-40 sm:h-56 overflow-hidden">
+                          <motion.div
+                            className="absolute inset-0"
+                            whileHover={{ scale: 1.1 }}
+                            transition={{ duration: 0.6, ease: "easeOut" }}
+                          >
+                            <Image
+                              width={400}
+                              height={320}
+                              src={cat.image}
+                              alt={cat.name}
+                              className="w-full h-full object-cover"
+                              priority={index < 2}
+                            />
+                          </motion.div>
+
+                          {/* Gradient Overlay */}
+                          <motion.div
+                            variants={overlayVariants}
+                            className={`absolute inset-0 bg-gradient-to-t ${cat.color} mix-blend-multiply`}
+                          />
+
+                          {/* Dark Overlay for Text Readability */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                         </div>
 
-                        {/* Arrow Icon */}
+                        {/* Content Overlay */}
                         <motion.div
-                          className="flex items-center justify-center w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm"
-                          whileHover={{ x: 5 }}
-                          transition={{ duration: 0.2 }}
+                          variants={contentVariants}
+                          className="absolute inset-0 flex flex-col justify-end p-6 text-white"
                         >
-                          <ArrowRight className="w-4 h-4" />
+                          {/* Icon */}
+                          <motion.div
+                            className="mb-4"
+                            whileHover={{ rotate: 360, scale: 1.2 }}
+                            transition={{ duration: 0.6 }}
+                          >
+                            <div
+                              className={`inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r ${cat.color} shadow-lg`}
+                            >
+                              <IconComponent className="w-6 h-6 text-white" />
+                            </div>
+                          </motion.div>
+
+                          {/* Category Name */}
+                          <h3 className="text-2xl sm:text-3xl font-bold mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-white group-hover:to-gray-200 transition-all duration-300">
+                            {cat.name}
+                          </h3>
+
+                          {/* Description */}
+                          <p className="text-white/90 text-sm mb-4 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                            {cat.description}
+                          </p>
+
+                          {/* Stats Row */}
+                          <div className="flex items-center justify-between text-sm">
+                            <div className="flex items-center space-x-3">
+                              <div className="flex items-center space-x-1">
+                                <ShoppingBag className="w-4 h-4" />
+                                <span className="font-medium">{cat.items}</span>
+                              </div>
+                              <div
+                                className={`flex items-center space-x-1 px-2 py-1 rounded-full bg-gradient-to-r ${cat.color} text-xs font-bold`}
+                              >
+                                <TrendingUp className="w-3 h-3" />
+                                <span>{cat.trend}</span>
+                              </div>
+                            </div>
+
+                            {/* Arrow Icon */}
+                            <motion.div
+                              className="flex items-center justify-center w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm"
+                              whileHover={{ x: 5 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <ArrowRight className="w-4 h-4" />
+                            </motion.div>
+                          </div>
                         </motion.div>
-                      </div>
+                      </Link>
                     </motion.div>
-                  </Link>
-                </motion.div>
-              </motion.div>
-            );
-          })}
+                  </motion.div>
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
         </motion.div>
 
         {/* Call to Action */}
@@ -334,6 +352,29 @@ export default function Categories() {
           </motion.button>
         </motion.div>
       </div>
+
+      {/* Custom Swiper Styles */}
+      <style jsx>{`
+        :global(.swiper-button-next, .swiper-button-prev) {
+          color: #fff;
+          background: rgba(0, 0, 0, 0.5);
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          transition: background 0.3s;
+        }
+        :global(.swiper-button-next:hover, .swiper-button-prev:hover) {
+          background: rgba(0, 0, 0, 0.7);
+        }
+        :global(.swiper-pagination-bullet) {
+          background: #fff;
+          opacity: 0.7;
+        }
+        :global(.swiper-pagination-bullet-active) {
+          background: #f59e0b;
+          opacity: 1;
+        }
+      `}</style>
     </section>
   );
 }

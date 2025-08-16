@@ -79,7 +79,7 @@ export default function Navbar() {
       variants={navbarVariants}
       initial="initial"
       animate="animate"
-      className={`sticky top-0 z-50 transition-all duration-300 ${
+      className={`sticky top-0 z-50 py-1 transition-all duration-300 ${
         scrolled
           ? "backdrop-blur-md bg-white/80 dark:bg-dark-surface/80 border-b border-gray-200/50 dark:border-gray-700/50 shadow-lg"
           : "bg-white dark:bg-dark-surface border-b border-gray-200 dark:border-gray-700"
@@ -91,7 +91,7 @@ export default function Navbar() {
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Link
               href="/"
-              className="text-2xl font-bold tracking-tight bg-gradient-to-r from-yellow-500 to-amber-600 dark:from-yellow-400 dark:to-amber-500 bg-clip-text text-transparent hover:from-amber-600 hover:to-black dark:hover:from-amber-500 dark:hover:to-black transition-all duration-300"
+              className="text-3xl italic font-bold tracking-tight bg-gradient-to-r from-yellow-500 to-amber-600 dark:from-yellow-400 dark:to-amber-500 bg-clip-text text-transparent hover:from-amber-600 hover:to-black dark:hover:from-amber-500 dark:hover:to-black transition-all duration-300"
             >
               InstallBrand
             </Link>

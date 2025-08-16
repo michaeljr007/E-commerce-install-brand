@@ -49,7 +49,12 @@ const slides = [
 
 export default function Hero() {
   return (
-    <section className="relative w-full h-[92vh] max-h-[1000px] dark:bg-dark-surface">
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, delay: 0.1 }}
+      className="relative w-full h-[92vh] max-h-[1000px] dark:bg-dark-surface"
+    >
       <Swiper
         modules={[Navigation, Autoplay]}
         navigation={{
@@ -150,6 +155,6 @@ export default function Hero() {
           ))}
         </div>
       </Swiper>
-    </section>
+    </motion.section>
   );
 }
