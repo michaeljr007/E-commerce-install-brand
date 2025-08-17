@@ -174,7 +174,7 @@ export default function Categories() {
               stiffness: 500,
               damping: 30,
             }}
-            className="inline-flex items-center space-x-2 bg-gradient-to-r from-yellow-500 to-amber-600 dark:from-yellow-400 dark:to-amber-500 px-6 py-3 rounded-full text-white font-semibold mb-6 shadow-lg"
+            className="inline-flex items-center space-x-2 bg-gradient-to-r from-yellow-500 to-amber-600 dark:from-yellow-400 dark:to-amber-500 px-6 py-2 rounded-full text-white font-semibold mb-6 shadow-lg"
           >
             <Sparkles className="w-5 h-5" />
             <span>Explore Collections</span>
