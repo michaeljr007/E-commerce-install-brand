@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
 import "@/styles/globals.css";
+import { SessionProviderWrapper } from "@/components/SessionProviderWrapper";
 
 const ubuntu = Ubuntu({
   variable: "--font-ubuntu",
@@ -20,7 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${ubuntu.variable} font-sans`}>{children}</body>
+      <body className={`${ubuntu.variable} font-sans`}>
+        <SessionProviderWrapper>{children}</SessionProviderWrapper>
+      </body>
     </html>
   );
 }

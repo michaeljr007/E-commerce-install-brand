@@ -2,11 +2,16 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ShoppingBag, User, Menu, X, Search, Sun, Moon } from "lucide-react";
 import { useThemeStore } from "@/store/useThemeStore";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSession } from "next-auth/react";
 
 export default function Navbar() {
+  const { data: session } = useSession();
+  const router = useRouter();
+
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -54,13 +59,9 @@ export default function Navbar() {
   };
 
   const linkVariants = {
-    hover: {
-      scale: 1.05,
-      transition: { duration: 0.2, ease: "easeInOut" as const },
-    },
+    hover: { scale: 1.05, transition: { duration: 0.2 } },
     tap: { scale: 0.95 },
   };
-
   const searchVariants = {
     focused: {
       scale: 1.02,
@@ -72,6 +73,14 @@ export default function Navbar() {
       boxShadow: "0 0 0 0px rgba(218, 165, 32, 0)",
       transition: { duration: 0.2 },
     },
+  };
+
+  const handleUserClick = () => {
+    if (!session?.user) return router.push("/login");
+
+    // Check role and route accordingly
+    if (session.user.role === "ADMIN") router.push("/admin");
+    else router.push("/dashboard");
   };
 
   return (
@@ -132,7 +141,7 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* Enhanced Search */}
+          {/* Search */}
           <motion.div
             className="hidden md:flex items-center relative"
             variants={searchVariants}
@@ -188,12 +197,12 @@ export default function Navbar() {
 
             {/* User Account */}
             <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-              <Link
-                href="/account"
+              <button
+                onClick={handleUserClick}
                 className="p-2.5 rounded-full hover:bg-gray-100 dark:hover:bg-dark-elevated text-gray-700 hover:text-amber-600 dark:text-gray-300 dark:hover:text-amber-400 transition-all duration-200"
               >
                 <User className="h-5 w-5" />
-              </Link>
+              </button>
             </motion.div>
 
             {/* Shopping Cart */}
@@ -252,7 +261,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Enhanced Mobile Nav */}
+      {/* Mobile Nav */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.nav

@@ -14,6 +14,8 @@ import {
   Settings,
   ChevronRight,
 } from "lucide-react";
+import FloatingThemeSettings from "@/components/FloatingThemeSettings";
+import LogoutButton from "@/components/LogoutButton";
 
 export default function AdminLayout({
   children,
@@ -35,8 +37,8 @@ export default function AdminLayout({
 
   const navigationItems = [
     { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
-    { href: "/admin/users", label: "Users", icon: Users },
     { href: "/admin/products", label: "Products", icon: Package },
+    { href: "/admin/users", label: "Users", icon: Users },
     { href: "/admin/orders", label: "Orders", icon: ShoppingCart },
     { href: "/admin/settings", label: "Settings", icon: Settings },
   ];
@@ -124,10 +126,7 @@ export default function AdminLayout({
                 <LayoutDashboard className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h2 className="text-xl font-bold text-white">Admin Panel</h2>
-                <p className="text-blue-100 text-sm opacity-90">
-                  Management Console
-                </p>
+                <h2 className="text-xl font-bold text-white">User Panel</h2>
               </div>
             </motion.div>
             <motion.button
@@ -194,24 +193,25 @@ export default function AdminLayout({
               </motion.div>
             );
           })}
-        </nav>
+          <LogoutButton />
 
-        {/* Sidebar Footer */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-dark-surface">
-          <div className="flex items-center space-x-3 p-3 rounded-xl bg-white dark:bg-dark-elevated shadow-sm">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
-              <span className="text-white font-semibold text-sm">A</span>
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
-                Admin User
-              </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
-                admin@company.com
-              </p>
+          {/* Sidebar Footer */}
+          <div className="absolute md:w-[20%] bottom-0 left-0 right-0 p-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-dark-surface">
+            <div className="flex items-center space-x-3 p-3 rounded-xl bg-white dark:bg-dark-elevated shadow-sm">
+              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                <span className="text-white font-semibold text-sm">A</span>
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
+                  User
+                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                  user@company.com
+                </p>
+              </div>
             </div>
           </div>
-        </div>
+        </nav>
       </motion.aside>
 
       {/* Mobile Overlay */}
@@ -247,10 +247,10 @@ export default function AdminLayout({
             </motion.button>
             <div>
               <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-                Admin Dashboard
+                Dashboard
               </h1>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                Welcome back, manage your platform
+                Welcome back, what are we doing today?
               </p>
             </div>
           </div>
@@ -280,6 +280,9 @@ export default function AdminLayout({
           <div className="max-w-7xl mx-auto">{children}</div>
         </motion.main>
       </div>
+
+      {/* Floating Settings */}
+      <FloatingThemeSettings />
     </div>
   );
 }
