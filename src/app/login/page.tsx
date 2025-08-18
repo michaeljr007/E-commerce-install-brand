@@ -1,8 +1,8 @@
 "use client";
 
 import Navbar from "@/components/Navbar";
-import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { signIn, useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Mail,
@@ -23,11 +23,29 @@ const LoginPage = () => {
   const [error, setError] = useState("");
   const [form, setForm] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (session?.user?.role === "ADMIN") {
+      router.push("/admin");
+    } else if (session?.user?.role === "CUSTOMER") {
+      router.push("/dashboard");
+    }
+  }, [status, session, router]);
 
   const handleGoogleSignIn = async () => {
-    setLoadingGoogle(true);
-    await signIn("google", { callbackUrl: "/" });
-    setLoadingGoogle(false);
+    try {
+      setLoadingGoogle(true);
+      const res = await signIn("google", { redirect: false });
+      if (res?.error) {
+        setError("Google sign-in failed. Please try again.");
+      }
+      // eslint-disable-next-line
+    } catch (err: any) {
+      setError(err);
+    } finally {
+      setLoadingGoogle(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,9 +65,8 @@ const LoginPage = () => {
 
     if (res?.error) {
       setError("Invalid email or password");
-    } else {
-      router.push("/dashboard");
     }
+
     setLoadingCredentials(false);
   };
 

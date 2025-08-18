@@ -13,6 +13,7 @@ import {
   ShoppingCart,
   Settings,
   ChevronRight,
+  Home,
 } from "lucide-react";
 import FloatingThemeSettings from "@/components/FloatingThemeSettings";
 import LogoutButton from "@/components/LogoutButton";
@@ -41,6 +42,7 @@ export default function AdminLayout({
     { href: "/admin/users", label: "Users", icon: Users },
     { href: "/admin/orders", label: "Orders", icon: ShoppingCart },
     { href: "/admin/settings", label: "Settings", icon: Settings },
+    { href: "/", label: "Home", icon: Home },
   ];
 
   const sidebarVariants = {

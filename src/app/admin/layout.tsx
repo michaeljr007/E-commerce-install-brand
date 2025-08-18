@@ -13,6 +13,7 @@ import {
   ShoppingCart,
   Settings,
   ChevronRight,
+  Home,
 } from "lucide-react";
 import FloatingThemeSettings from "@/components/FloatingThemeSettings";
 import LogoutButton from "@/components/LogoutButton";
@@ -41,6 +42,7 @@ export default function AdminLayout({
     { href: "/admin/users", label: "Users", icon: Users },
     { href: "/admin/orders", label: "Orders", icon: ShoppingCart },
     { href: "/admin/settings", label: "Settings", icon: Settings },
+    { href: "/", label: "Home", icon: Home },
   ];
 
   const sidebarVariants = {
@@ -111,7 +113,7 @@ export default function AdminLayout({
         variants={sidebarVariants}
         animate={isOpen ? "open" : "closed"}
         initial="closed"
-        className="fixed top-0 left-0 h-screen w-72 bg-white dark:bg-dark-elevated shadow-2xl z-50 md:translate-x-0 md:static md:shadow-none border-r border-gray-200 dark:border-gray-700"
+        className="fixed overflow-y-scroll top-0 left-0 h-screen w-72 bg-white dark:bg-dark-elevated shadow-2xl z-50 md:translate-x-0 md:static md:shadow-none border-r border-gray-200 dark:border-gray-700"
       >
         {/* Sidebar Header */}
         <div className="p-6 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-700 dark:to-purple-700">
@@ -237,7 +239,7 @@ export default function AdminLayout({
         <motion.header
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="bg-white dark:bg-dark-elevated shadow-sm border-b border-gray-200 dark:border-gray-700 px-6 py-4 flex items-center justify-between sticky top-0 z-30 backdrop-blur-sm bg-opacity-90 dark:bg-opacity-90"
+          className="bg-white dark:bg-dark-elevated shadow-sm border-b border-gray-200 dark:border-gray-700 px-6 py-2 md:py-4 flex items-center justify-between sticky top-0 z-30 backdrop-blur-sm bg-opacity-90 dark:bg-opacity-90"
         >
           <div className="flex items-center space-x-4">
             <motion.button

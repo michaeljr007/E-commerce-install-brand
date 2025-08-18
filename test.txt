@@ -1,4 +1,5 @@
 make this react component more beautiful, modern, industry level standard, and responsive. Add icons from lucid and animations from framer motion when necessary. style with dark mode using dark:bg-dark-surface and dark:bg-dark-elevated. 
 MAINTAIN ALL IMPORTS AND CURRENT FUNCTIONALITY
 
-give me a standard and industry level navbar for a clothing ecommerce store.
+
+// eslint-disable-next-line
