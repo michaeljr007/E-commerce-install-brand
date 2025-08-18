@@ -11,7 +11,6 @@ import {
   EyeOff,
   ArrowRight,
   AlertCircle,
-  Chrome,
   LogIn,
 } from "lucide-react";
 import { useRouter } from "next/navigation";

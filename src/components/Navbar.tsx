@@ -213,7 +213,7 @@ export default function Navbar() {
             >
               <Link
                 href="/cart"
-                className="p-2.5 rounded-full hover:bg-gray-100 dark:hover:bg-dark-elevated text-gray-700 hover:text-amber-600 dark:text-gray-300 dark:hover:text-amber-400 transition-all duration-200"
+                className="p-2.5 rounded-full text-gray-700 hover:text-amber-600 dark:text-gray-300 dark:hover:text-amber-400 transition-all duration-200"
               >
                 <ShoppingBag className="h-5 w-5" />
                 <motion.span
