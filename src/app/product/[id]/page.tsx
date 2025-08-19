@@ -59,7 +59,6 @@ const ProductInfo = () => {
 
   const handleAddToCart = async () => {
     setIsLoading(true);
-    // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1000));
     setIsLoading(false);
   };
@@ -96,22 +95,22 @@ const ProductInfo = () => {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="max-w-7xl mx-auto px-8 py-4"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6"
       >
         {/* Breadcrumb */}
-        <motion.nav variants={itemVariants} className="mb-4 text-sm">
+        <motion.nav variants={itemVariants} className="mb-4 text-xs sm:text-sm">
           <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
             <span>Home</span>
-            <ChevronRight size={16} />
+            <ChevronRight size={12} className="sm:w-4 sm:h-4" />
             <span>Product</span>
-            <ChevronRight size={16} />
+            <ChevronRight size={12} className="sm:w-4 sm:h-4" />
             <span className="text-gray-900 dark:text-white font-medium">
               {mockProduct.name}
             </span>
           </div>
         </motion.nav>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-start">
           {/* Product Images */}
           <motion.div variants={itemVariants} className="space-y-4">
             {/* Discount Badge */}
@@ -120,7 +119,7 @@ const ProductInfo = () => {
                 initial={{ scale: 0, rotate: -10 }}
                 animate={{ scale: 1, rotate: 0 }}
                 transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
-                className="absolute top-4 left-4 z-10 bg-gradient-to-r from-red-500 to-pink-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg"
+                className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10 bg-gradient-to-r from-red-500 to-pink-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-bold shadow-lg"
               >
                 -{mockProduct.discount}%
               </motion.div>
@@ -130,7 +129,7 @@ const ProductInfo = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
-              className="relative w-full h-[400px] sm:h-[500px] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-gray-100 to-gray-200 dark:from-dark-elevated dark:to-dark-surface"
+              className="relative w-full h-[300px] sm:h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-gray-100 to-gray-200 dark:from-dark-elevated dark:to-dark-surface"
             >
               <Swiper
                 modules={[Navigation, Pagination]}
@@ -143,6 +142,7 @@ const ProductInfo = () => {
                 pagination={{
                   clickable: true,
                   dynamicBullets: true,
+                  el: ".swiper-pagination-custom",
                 }}
                 onSlideChange={(swiper) =>
                   setSelectedImage(mockProduct.images[swiper.activeIndex])
@@ -163,23 +163,24 @@ const ProductInfo = () => {
               </Swiper>
 
               {/* Custom Navigation Buttons */}
-              <button className="swiper-button-prev-custom absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white dark:bg-dark-elevated/80 dark:hover:bg-dark-elevated backdrop-blur-sm rounded-full p-3 shadow-lg transition-all group">
-                <ChevronLeft className="w-5 h-5 text-gray-800 dark:text-white group-hover:scale-110 transition-transform" />
+              <button className="swiper-button-prev-custom absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white dark:bg-dark-elevated/80 dark:hover:bg-dark-elevated backdrop-blur-sm rounded-full p-2 sm:p-3 shadow-lg transition-all group">
+                <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 text-gray-800 dark:text-white group-hover:scale-110 transition-transform" />
               </button>
-              <button className="swiper-button-next-custom absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white dark:bg-dark-elevated/80 dark:hover:bg-dark-elevated backdrop-blur-sm rounded-full p-3 shadow-lg transition-all group">
-                <ChevronRight className="w-5 h-5 text-gray-800 dark:text-white group-hover:scale-110 transition-transform" />
+              <button className="swiper-button-next-custom absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white dark:bg-dark-elevated/80 dark:hover:bg-dark-elevated backdrop-blur-sm rounded-full p-2 sm:p-3 shadow-lg transition-all group">
+                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-800 dark:text-white group-hover:scale-110 transition-transform" />
               </button>
+              <div className="swiper-pagination-custom absolute bottom-2 sm:bottom-4 w-full text-center" />
             </motion.div>
 
             {/* Thumbnail Grid */}
-            <div className="flex gap-3 overflow-x-auto pb-2">
+            <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-2">
               {mockProduct.images.map((img, idx) => (
                 <motion.div
                   key={idx}
                   onClick={() => setSelectedImage(img)}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`relative flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden cursor-pointer border-3 transition-all ${
+                  className={`relative flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-xl overflow-hidden cursor-pointer border-2 sm:border-3 transition-all ${
                     selectedImage === img
                       ? "border-amber-500 shadow-lg shadow-amber-500/25"
                       : "border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600"
@@ -197,7 +198,10 @@ const ProductInfo = () => {
           </motion.div>
 
           {/* Product Details */}
-          <motion.div variants={itemVariants} className="space-y-5">
+          <motion.div
+            variants={itemVariants}
+            className="space-y-4 sm:space-y-5"
+          >
             {/* Stock Status */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
@@ -206,15 +210,15 @@ const ProductInfo = () => {
             >
               {mockProduct.inStock ? (
                 <>
-                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                  <span className="text-green-600 dark:text-green-400 font-medium">
+                  <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full animate-pulse"></div>
+                  <span className="text-green-600 dark:text-green-400 font-medium text-sm sm:text-base">
                     In Stock
                   </span>
                 </>
               ) : (
                 <>
-                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                  <span className="text-red-600 dark:text-red-400 font-medium">
+                  <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
+                  <span className="text-red-600 dark:text-red-400 font-medium text-sm sm:text-base">
                     Out of Stock
                   </span>
                 </>
@@ -226,7 +230,7 @@ const ProductInfo = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-3xl sm:text-4xl font-semibold text-gray-900 dark:text-white leading-tight"
+              className="text-2xl sm:text-3xl font-semibold text-gray-900 dark:text-white leading-tight"
             >
               {mockProduct.name}
             </motion.h1>
@@ -236,7 +240,7 @@ const ProductInfo = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="flex items-center gap-4"
+              className="flex items-center gap-2 sm:gap-4"
             >
               <div className="flex items-center gap-1">
                 {[...Array(5)].map((_, i) => (
@@ -247,8 +251,8 @@ const ProductInfo = () => {
                     transition={{ delay: 0.3 + i * 0.1 }}
                   >
                     <Star
-                      size={20}
-                      className={`${
+                      size={16}
+                      className={`sm:w-4 sm:h-4 ${
                         i < Math.floor(mockProduct.rating)
                           ? "text-yellow-400 fill-yellow-400"
                           : "text-gray-300 dark:text-gray-600"
@@ -257,7 +261,7 @@ const ProductInfo = () => {
                   </motion.div>
                 ))}
               </div>
-              <span className="text-gray-600 dark:text-gray-400 font-medium">
+              <span className="text-gray-600 dark:text-gray-400 font-medium text-sm">
                 {mockProduct.rating} ({mockProduct.reviews} reviews)
               </span>
             </motion.div>
@@ -267,18 +271,18 @@ const ProductInfo = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="flex items-center gap-4"
+              className="flex items-center gap-3 sm:gap-4"
             >
-              <span className="text-4xl font-bold text-gray-900 dark:text-white">
+              <span className="text-3xl font-bold text-gray-900 dark:text-white">
                 ${mockProduct.price}
               </span>
               {mockProduct.originalPrice && (
-                <span className="text-2xl text-gray-500 line-through">
+                <span className="text-xl text-gray-500 line-through">
                   ${mockProduct.originalPrice}
                 </span>
               )}
               {mockProduct.discount && (
-                <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm font-bold">
+                <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 sm:px-3 py-1 rounded-full text-xs font-bold">
                   Save ${mockProduct.originalPrice - mockProduct.price}
                 </span>
               )}
@@ -289,7 +293,7 @@ const ProductInfo = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed"
+              className="text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed"
             >
               {mockProduct.description}
             </motion.p>
@@ -301,19 +305,22 @@ const ProductInfo = () => {
               transition={{ delay: 0.5 }}
               className="space-y-3"
             >
-              <h3 className="font-semibold text-gray-900 dark:text-white text-lg">
+              <h3 className="font-semibold text-gray-900 dark:text-white text-base sm:text-lg">
                 Key Features
               </h3>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 {mockProduct.features.map((feature, idx) => (
                   <motion.div
                     key={idx}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.6 + idx * 0.1 }}
-                    className="flex items-center gap-2 text-gray-700 dark:text-gray-300"
+                    className="flex items-center gap-2 text-gray-700 dark:text-gray-300 text-sm sm:text-base"
                   >
-                    <Check size={16} className="text-green-500 flex-shrink-0" />
+                    <Check
+                      size={14}
+                      className="sm:w-4 sm:h-4 text-green-500 flex-shrink-0"
+                    />
                     <span>{feature}</span>
                   </motion.div>
                 ))}
@@ -325,12 +332,12 @@ const ProductInfo = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              className="space-y-4"
+              className="space-y-3 sm:space-y-4"
             >
-              <h3 className="font-semibold text-gray-900 dark:text-white text-lg">
+              <h3 className="font-semibold text-gray-900 dark:text-white text-base sm:text-lg">
                 Color
               </h3>
-              <div className="flex gap-4">
+              <div className="flex gap-2 sm:gap-4">
                 {mockProduct.colors.map((color, idx) => (
                   <motion.div
                     key={color}
@@ -340,7 +347,7 @@ const ProductInfo = () => {
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.7 + idx * 0.1 }}
-                    className={`relative w-12 h-12 rounded-full cursor-pointer border-4 transition-all shadow-lg ${
+                    className={`relative w-10 h-10 rounded-full cursor-pointer border-2 sm:border-4 transition-all shadow-lg ${
                       selectedColor === color
                         ? "border-amber-500 shadow-amber-500/25"
                         : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
@@ -354,8 +361,8 @@ const ProductInfo = () => {
                         className="absolute inset-0 flex items-center justify-center"
                       >
                         <Check
-                          size={20}
-                          className="text-white drop-shadow-lg"
+                          size={16}
+                          className="sm:w-5 sm:h-5 text-white drop-shadow-lg"
                         />
                       </motion.div>
                     )}
@@ -369,12 +376,12 @@ const ProductInfo = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
-              className="space-y-4"
+              className="space-y-3 sm:space-y-4"
             >
-              <h3 className="font-semibold text-gray-900 dark:text-white text-lg">
+              <h3 className="font-semibold text-gray-900 dark:text-white text-base sm:text-lg">
                 Size
               </h3>
-              <div className="flex gap-3">
+              <div className="flex gap-2 sm:gap-3 flex-wrap">
                 {mockProduct.sizes.map((size, idx) => (
                   <motion.div
                     key={size}
@@ -384,7 +391,7 @@ const ProductInfo = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.8 + idx * 0.1 }}
-                    className={`px-6 py-3 border-2 rounded-xl cursor-pointer font-medium transition-all shadow-sm ${
+                    className={`px-4 py-2 border-2 rounded-xl cursor-pointer font-medium transition-all shadow-sm text-sm sm:text-base ${
                       selectedSize === size
                         ? "border-amber-500 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 shadow-amber-500/25"
                         : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 bg-white dark:bg-dark-elevated"
@@ -401,32 +408,32 @@ const ProductInfo = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4"
             >
               <div className="flex items-center border-2 border-gray-300 dark:border-gray-600 rounded-xl overflow-hidden bg-white dark:bg-dark-elevated shadow-sm">
                 <motion.button
                   onClick={decrement}
                   whileHover={{ backgroundColor: "rgba(243, 244, 246, 0.8)" }}
                   whileTap={{ scale: 0.95 }}
-                  className="p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                  className="p-3 sm:py-2 sm:px-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                 >
                   <Minus
-                    size={20}
-                    className="text-gray-700 dark:text-gray-300"
+                    size={16}
+                    className="sm:w-5 sm:h-5 text-gray-700 dark:text-gray-300"
                   />
                 </motion.button>
-                <span className="px-6 py-4 font-bold text-xl min-w-[80px] text-center text-gray-900 dark:text-white">
+                <span className="px-4 sm:px-6 py-3 sm:py-4 font-bold text-lg sm:text-xl min-w-[60px] sm:min-w-[80px] text-center text-gray-900 dark:text-white">
                   {quantity}
                 </span>
                 <motion.button
                   onClick={increment}
                   whileHover={{ backgroundColor: "rgba(243, 244, 246, 0.8)" }}
                   whileTap={{ scale: 0.95 }}
-                  className="p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                  className="p-3 sm:py-2 sm:px-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                 >
                   <Plus
-                    size={20}
-                    className="text-gray-700 dark:text-gray-300"
+                    size={16}
+                    className="sm:w-5 sm:h-5 text-gray-700 dark:text-gray-300"
                   />
                 </motion.button>
               </div>
@@ -436,7 +443,7 @@ const ProductInfo = () => {
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 disabled={isLoading}
-                className="flex-1 flex items-center justify-center gap-3 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 disabled:from-gray-400 disabled:to-gray-500 text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all disabled:cursor-not-allowed"
+                className="flex-1 flex items-center justify-center gap-2 sm:gap-3 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 disabled:from-gray-400 disabled:to-gray-500 text-white font-bold px-6 sm:px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all disabled:cursor-not-allowed"
               >
                 <AnimatePresence mode="wait">
                   {isLoading ? (
@@ -447,7 +454,7 @@ const ProductInfo = () => {
                       exit={{ opacity: 0, scale: 0.8 }}
                       className="flex items-center gap-2"
                     >
-                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                       <span>Adding...</span>
                     </motion.div>
                   ) : (
@@ -458,7 +465,7 @@ const ProductInfo = () => {
                       exit={{ opacity: 0, scale: 0.8 }}
                       className="flex items-center gap-2"
                     >
-                      <ShoppingCart size={20} />
+                      <ShoppingCart size={16} className="sm:w-5 sm:h-5" />
                       <span>Add to Cart</span>
                     </motion.div>
                   )}
@@ -471,13 +478,13 @@ const ProductInfo = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9 }}
-              className="flex gap-4"
+              className="flex gap-3 sm:gap-4"
             >
               <motion.button
                 onClick={toggleWishlist}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className={`flex items-center gap-2 px-6 py-3 rounded-xl border-2 font-medium transition-all shadow-sm ${
+                className={`flex items-center gap-2 px-4 sm:px-6 py-2 rounded-xl border-2 font-medium transition-all shadow-sm text-sm sm:text-base ${
                   isWishlisted
                     ? "border-red-500 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400"
                     : "border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-elevated text-gray-700 dark:text-gray-300 hover:border-red-400"
@@ -488,8 +495,10 @@ const ProductInfo = () => {
                   transition={{ duration: 0.3 }}
                 >
                   <Heart
-                    size={20}
-                    className={isWishlisted ? "fill-current" : ""}
+                    size={16}
+                    className={`sm:w-5 sm:h-5 ${
+                      isWishlisted ? "fill-current" : ""
+                    }`}
                   />
                 </motion.div>
                 {isWishlisted ? "In Wishlist" : "Add to Wishlist"}
@@ -501,7 +510,7 @@ const ProductInfo = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.0 }}
-              className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8 border-t border-gray-200 dark:border-gray-700"
+              className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 pt-6 sm:pt-8 border-t border-gray-200 dark:border-gray-700"
             >
               {[
                 {
@@ -525,16 +534,16 @@ const ProductInfo = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.1 + idx * 0.1 }}
-                  className="flex items-center gap-3 p-4 rounded-xl bg-gray-50 dark:bg-dark-elevated"
+                  className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-xl bg-gray-50 dark:bg-dark-elevated"
                 >
                   <div className="p-2 bg-amber-100 dark:bg-amber-900/30 rounded-lg">
                     <service.icon
-                      size={20}
-                      className="text-amber-600 dark:text-amber-400"
+                      size={16}
+                      className="sm:w-5 sm:h-5 text-amber-600 dark:text-amber-400"
                     />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900 dark:text-white text-sm">
+                    <h4 className="font-semibold text-gray-900 dark:text-white text-xs sm:text-sm">
                       {service.title}
                     </h4>
                     <p className="text-gray-600 dark:text-gray-400 text-xs">

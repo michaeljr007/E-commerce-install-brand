@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { Star, Quote, Heart, CheckCircle } from "lucide-react";
-import Image from "next/image";
 
 const testimonials = [
   {
@@ -140,7 +139,7 @@ export default function Testimonials() {
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       className="relative w-16 h-16 rounded-2xl overflow-hidden shadow-lg border-2 border-white dark:border-gray-700"
                     >
-                      <Image
+                      <img
                         src={t.image}
                         alt={t.name}
                         width={64}

@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
 import "@/styles/globals.css";
 import { SessionProviderWrapper } from "@/components/SessionProviderWrapper";
+import GlobalLoader from "@/components/GlobalLoader";
 
 const ubuntu = Ubuntu({
   variable: "--font-ubuntu",
   subsets: ["latin"],
-  weight: ["400", "500", "700"], // choose the weights you need
+  weight: ["400", "500", "700"],
 });
 
 export const metadata: Metadata = {
@@ -16,9 +17,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <head>
@@ -41,11 +42,12 @@ export default function RootLayout({
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/site.webmanifest"></link>
-
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className={`${ubuntu.variable} font-sans`}>
-        <SessionProviderWrapper>{children}</SessionProviderWrapper>
+        <SessionProviderWrapper>
+          <GlobalLoader>{children}</GlobalLoader>
+        </SessionProviderWrapper>
       </body>
     </html>
   );
